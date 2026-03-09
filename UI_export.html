@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customize Your Robot’s Personality</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='UI.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Customize Your Robot’s Personality</h1>
+
+    <div class="trait">
+      <label for="openness"></label>
+      <div>
+        <input type="range" id="openness" min="0" max="2" value="1" />
+        <div class="slider-labels">
+          <span>Practical &amp;<br>Traditional</span>
+          <span>Medium</span>
+          <span>Creative &amp;<br>Adventurous</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trait">
+      <label for="conscientiousness"></label>
+      <div>
+        <input type="range" id="conscientiousness" min="0" max="2" value="1" />
+        <div class="slider-labels">
+          <span>Spontaneous &amp;<br> Easygoing</span>
+          <span>Medium</span>
+          <span>Careful &amp;<br> Detail-Oriented</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trait">
+      <label for="extraversion"></label>
+      <div>
+        <input type="range" id="extraversion" min="0" max="2" value="1" />
+        <div class="slider-labels">
+          <span>Quiet &amp;<br> Reserved</span>
+          <span>Medium</span>
+          <span>Talkative &amp;<br> Enthusiastic</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trait">
+      <label for="agreeableness"></label>
+      <div>
+        <input type="range" id="agreeableness" min="0" max="2" value="1" />
+        <div class="slider-labels">
+          <span>Blunt &amp;<br> Independent</span>
+          <span>Medium</span>
+          <span>Kind &amp;<br> Supportive</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trait">
+      <label for="emotionalStability"></label>
+      <div>
+        <input type="range" id="emotionalStability" min="0" max="2" value="1" />
+        <div class="slider-labels">
+          <span>Relaxed &amp;<br> Even-Tempered</span>
+          <span>Medium</span>
+          <span>Sensitive &amp;<br> Reactive</span>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="submitForm()">Submit</button>
+  </div>
+
+  <script>
+    function submitForm() {
+      const descriptions = {
+        openness: ["Low (Practical & Traditional)", "Medium", "High (Creative & Adventurous)"],
+        conscientiousness: ["Low (Spontaneous & Easygoing)", "Medium", "High (Careful & Detail-Oriented)"],
+        extraversion: ["Low (Quiet & Reserved)", "Medium", "High (Talkative & Enthusiastic)"],
+        agreeableness: ["Low (Blunt & Independent)", "Medium", "High (Kind & Supportive)"],
+        emotionalStability: ["Low (Relaxed & Even-Tempered)", "Medium", "High (Sensitive & Reactive)"]
+      };
+
+      const payload = {};
+      for (const id in descriptions) {
+        const value = parseInt(document.getElementById(id).value);
+        payload[id] = descriptions[id][value];
+      }
+
+      fetch('/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(json => {
+        if (json.status === 'success') {
+          alert(`Settings saved on server as ${json.filename}`);
+        } else {
+          alert('Error saving on server.');
+        }
+      })
+      .catch(() => alert('Network or server error.'));
+    }
+  </script>
+</body>
+</html>

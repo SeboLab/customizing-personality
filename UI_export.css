@@ -1,0 +1,197 @@
+/* UI.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: #f5f7fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #333;
+}
+
+.container {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+/* ===== TRAIT / SLIDER STYLES ===== */
+.trait {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;    /* sliders fill full container width */
+  margin-bottom: 2rem;
+}
+
+.slider-wrapper {
+  width: 100%;             /* full width */
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin-top: 0.4em;
+  height: 8px;
+  border-radius: 4px;
+  background: #ddd;
+  outline: none;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+}
+
+/* Thumb styling */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #007bff;
+  border: 2px solid #fff;
+  cursor: pointer;
+  margin-top: -6px; /* vertically center thumb */
+}
+input[type=range]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #007bff;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+input[type=range]::-ms-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #007bff;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+
+/* Track styling */
+input[type=range]::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 4px;
+  background: #ccc;
+}
+input[type=range]::-moz-range-track {
+  height: 8px;
+  border-radius: 4px;
+  background: #ccc;
+}
+input[type=range]::-ms-track {
+  height: 8px;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #ccc;
+  border-radius: 4px;
+}
+input[type=range]::-ms-fill-upper {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+/* Label row below slider */
+.slider-labels {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;    /* larger labels */
+  font-weight: 600;     /* bold */
+  color: #333;          /* high contrast */
+  margin-top: 0.4em;
+}
+.slider-labels span {
+  white-space: nowrap;  /* prevent unwanted wraps */
+  line-height: 1.2;     /* tighter for stacked text */
+}
+
+/* “Low” flush left */
+.slider-labels span:first-child {
+  flex: none;
+  text-align: left;
+}
+
+/* “Medium” absolutely centered */
+.slider-labels span:nth-child(2) {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  flex: none;
+  text-align: center;
+}
+
+/* “High” flush right and right‑aligned text */
+.slider-labels span:last-child {
+  flex: none;
+  text-align: right;
+}
+
+.trait label {
+  display: none;  /* hide trait names */
+}
+
+/* ===== LEGACY DROPDOWN (optional) ===== */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6em 1.2em 0.6em 0.8em;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8em center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+select:focus {
+  outline: none;
+  border-color: #888;
+}
+
+/* ===== BUTTONS ===== */
+button {
+  width: 100%;
+  padding: 0.75em;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+button:hover {
+  background-color: #0056b3;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .trait {
+    align-items: stretch;
+  }
+  .select-wrapper {
+    width: 100%;
+  }
+}
